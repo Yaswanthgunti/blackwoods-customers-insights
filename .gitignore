@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Downloaded and generated data
+data/raw/*
+!data/raw/README.md
+data/processed/*.csv
+
+# Temporary analysis and rendering files
+tmp/
+outputs/figures/contact_sheet.png
+video/blackwoods_executive_briefing/
+video/blackwoods_executive_briefing_montage.png
+video/*.inspect.ndjson
+
+# LaTeX build artefacts (retain the final PDF)
+report/overleaf/*.aux
+report/overleaf/*.bbl
+report/overleaf/*.blg
+report/overleaf/*.fdb_latexmk
+report/overleaf/*.fls
+report/overleaf/*.log
+report/overleaf/*.out
+report/overleaf/comment.cut
+report/overleaf/job_ad_blackwoods_fullpage.jpg

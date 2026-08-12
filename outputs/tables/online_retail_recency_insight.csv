@@ -1,0 +1,5 @@
+recency_group,customers,repeat_purchase_rate,median_recency_days
+Most recent,852,0.778169014084507,13.0
+Recent,809,0.6674907292954264,47.0
+Lapsing,841,0.5326991676575505,104.0
+Least recent,815,0.3693251533742331,198.0

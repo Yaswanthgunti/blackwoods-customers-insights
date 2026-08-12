@@ -1,0 +1,29 @@
+dataset,model,metric,value,ci_low,ci_high
+Future repeat purchase,Logistic regression,average_precision,0.8103524913289011,0.7773858834105477,0.8439752692460769
+Future repeat purchase,Logistic regression,roc_auc,0.7356617294602628,0.7016467455562994,0.7681370098689909
+Future repeat purchase,Logistic regression,accuracy,0.636144578313253,,
+Future repeat purchase,Logistic regression,balanced_accuracy,0.5755380596299492,,
+Future repeat purchase,Logistic regression,precision,0.6306179775280899,0.5958167613636364,0.6676023923988034
+Future repeat purchase,Logistic regression,recall,0.9200819672131147,0.8973680952595328,0.9417706094085888
+Future repeat purchase,Logistic regression,f1,0.7483333333333333,0.7212241418306453,0.7760753825135354
+Future repeat purchase,RBF support vector machine,average_precision,0.814279076116111,0.7797729022548537,0.8463170092709515
+Future repeat purchase,RBF support vector machine,roc_auc,0.7364885916978239,0.7008500296182288,0.7695640451473313
+Future repeat purchase,RBF support vector machine,accuracy,0.6132530120481928,,
+Future repeat purchase,RBF support vector machine,balanced_accuracy,0.5355131339277155,,
+Future repeat purchase,RBF support vector machine,precision,0.6060991105463787,0.5725240367384972,0.64122619323001
+Future repeat purchase,RBF support vector machine,recall,0.9774590163934426,0.9633382517976641,0.9894302881940581
+Future repeat purchase,RBF support vector machine,f1,0.7482352941176471,0.720947229734415,0.7757319678864957
+Session purchase conversion,Logistic regression,average_precision,0.6633299071772265,0.6166546117468814,0.7101699303992836
+Session purchase conversion,Logistic regression,roc_auc,0.9041338462477865,0.8893428756629322,0.9168816178751089
+Session purchase conversion,Logistic regression,accuracy,0.8787680209698558,,
+Session purchase conversion,Logistic regression,balanced_accuracy,0.8102973682603651,,
+Session purchase conversion,Logistic regression,precision,0.5936952714535902,0.5523926356519606,0.6306348092062378
+Session purchase conversion,Logistic regression,recall,0.710691823899371,0.6666500994035784,0.7484524371533106
+Session purchase conversion,Logistic regression,f1,0.6469465648854962,0.6125553655756392,0.6771567375594797
+Session purchase conversion,RBF support vector machine,average_precision,0.669669952960596,0.6229428428123185,0.7181516689669531
+Session purchase conversion,RBF support vector machine,roc_auc,0.9040345199568501,0.888081939565739,0.9188280052229503
+Session purchase conversion,RBF support vector machine,accuracy,0.8813892529488859,,
+Session purchase conversion,RBF support vector machine,balanced_accuracy,0.8075805499582749,,
+Session purchase conversion,RBF support vector machine,precision,0.6039783001808319,0.5620502629691609,0.6446219447775922
+Session purchase conversion,RBF support vector machine,recall,0.70020964360587,0.65931526317942,0.7403710887348226
+Session purchase conversion,RBF support vector machine,f1,0.6485436893203883,0.6139376790728835,0.6803724680170575

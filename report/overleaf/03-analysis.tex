@@ -1,0 +1,143 @@
+%----------------------------------
+\section{Data Analysis}
+\label{sec:Data Analysis}
+%----------------------------------
+
+\subsection{Decision Questions and Analytical Design}
+
+This advertisement requires an analysis process that involves the conversion of complicated information into insights, forecasting, decision-making, and visualization~\cite{blackwoods2026job}. I have, therefore, formulated two questions for the stakeholders:
+
+\begin{enumerate}
+    \item Whom among existing clients must be prioritized by the account team since they have high potential for buying in the next 100 days?
+    \item Which digital sessions indicate that there is purchase intent on the part of the client, hence their inclusion in journey monitoring or testing?
+\end{enumerate}
+
+These were modeled independently since they lack any common identifier and refer to distinct organizations. To merge them would create artificial relationships. However, these sources present two layers of customer decision support (Table~\ref{tab:design}) - medium-term planning of accounts and immediate prioritization of digital journeys.
+
+\begin{table}[htbp]
+\caption{Decision design after data-quality processing.}
+\label{tab:design}
+\small
+\begin{tabularx}{\linewidth}{@{}Y Y r r@{}}
+\toprule
+\textbf{Source and unit} & \textbf{Binary outcome} & \textbf{Cases} & \textbf{Positive rate} \\
+\midrule
+Online Retail customer & Valid purchase, 1 Sep--9 Dec 2011 & 3,317 & 58.8\% \\
+Online Shoppers session & Session generated revenue & 12,205 & 15.6\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Data Preparation and Leakage Controls}
+
+\textbf{Customer repeat purchase.} The raw transactions data had 541,909 rows, including 5,268 exact duplicates and 135,080 rows without a customer ID. I discarded duplicates and transactions without a customer ID since repeating actions can't be linked to the customer. Invoices starting with ``C'' as well as non-positive quantities and prices were not considered as valid transactions. Cancellation-line rate was kept as a behavioural feature with history.
+
+I applied 1~September~2011 as a temporal cut-off point. Valid transactions before the date led to the creation of 12 customer features: recency, the number and total price of orders, average price per order, quantity, average basket size, product diversity, active order days, observed tenure, average unit price, cancellation-line rate and UK flag. The target variable captures any valid transaction between 1~September~2011 and 9~December~2011. This design excludes future transactions from predictors and reflects the use of recency, frequency and monetary measures for customers~\cite{chen2012datamining}.
+
+\textbf{Session conversion.} I removed 125 duplicate rows, resulting in 12,205 full sessions. The 17 provided predictors were kept, with \texttt{Revenue} being the target variable. The numeric variables were scaled, while the variables month, operating system, browser, region, traffic type, visitor type, and weekend were one-hot encoded. These predictors, according to the original study, are useful for predicting purchase intent in real time~\cite{sakar2019realtime}, but 
+\texttt{PageValues} is proximate to the target, and thus its availability in real time needs to be confirmed first.
+
+\subsection{Models and Validation}
+
+Two classifiers were applied to each data source. Class-weighted, regularised \textbf{logistic regression} serves as a simple linear baseline. Class-weighted \textbf{radial-basis-function support vector machine (RBF SVM)} captures complex nonlinear relationships via a kernel function~\cite{cortes1995support}. RBF SVM is the classifier that is new for this assignment; it is not used in any of my previous machine learning assessments. The previous work involved decision trees, random forests, nearest neighbours, logistic regression, neural networks and XGBoost.
+
+All the data processing took place within the pipeline of each model to avoid any data leakage from the hold-out test set into scaling and encoding procedures. A reproducible stratified 75:25 split with seed 42 left a separate test set untouched. Five-fold stratified cross-validation on the training set selected logistic-regression $C\in\{0.01,0.1,1,10\}$ and SVM $C\in\{0.5,1,5,10\}$ with $\gamma\in\{\text{scale},0.01,0.1\}$ according to the average precision score. The optimal classification threshold was chosen based on out-of-fold training scores. The test set was scored only once. The analysis is done using scikit-learn~\cite{pedregosa2011scikit}; the code and tables are provided in Appendix~\ref{sec:GitHub}.
+
+To avoid mistaking a minor difference in number as an indication of significance, I performed 1,000 stratified bootstrap resamples for 95\% confidence intervals and a paired bootstrap interval to assess the difference in mean average precision between SVM and logistic regression. Permutation
+importance calculated the drop in test average precision after 25 random permutations of each original feature.
+
+\subsection{Evaluation Measures}
+
+\textbf{Average precision (AP),} Summary of precision-recall curve, the key metric for model selection. It evaluates rankings regardless of thresholds and directly penalizes any dilution of true buyers among top ranks. This is particularly important for session conversion, which has only 15.6\% positive sessions; precision-recall performance is more meaningful than ROC on its own under class imbalance~\cite{saito2015precision}.
+
+captures how many flagged cases end up buying, whereas \textbf{recall} captures how many buyers are flagged. The harmonic mean of these two values, \textbf{F1}, is an evaluation of the selected operating point by the training procedure, without letting the majority class accuracy have any upper hand. Accuracy and Balanced Accuracy were also verified but were not considered alone for model selection.
+
+Lastly, \textbf{precision, lift and positive hits in the top 20\%} convert scoring into an implementation that is feasible for a capacity-limited stakeholder. Lift calculates the ratio of precision of the target group against the purchase rate of the entire population, while positive hits measure the proportion of all buyers in that particular target group.
+
+\subsection{Model Effectiveness}
+
+Table~\ref{tab:effectiveness} reports performance on held-out cases. Both algorithms discriminate future repeat purchasers moderately and session converters strongly. The session AP values are substantially above the 0.156 positive-rate baseline, and its ROC AUC is approximately 0.904. Figure~\ref{fig:performance} visualises the AP estimates and their bootstrap uncertainty.
+
+\begin{table}[htbp]
+\caption{Held-out performance. Brackets show 1,000-bootstrap 95\% intervals; threshold metrics use the F1-maximising threshold selected only from training data.}
+\label{tab:effectiveness}
+\scriptsize
+\begin{tabularx}{\linewidth}{@{}Y l l r r r r@{}}
+\toprule
+\textbf{Outcome} & \textbf{Model} & \textbf{AP [95\% CI]} & \textbf{ROC} & \textbf{F1} & \textbf{Prec.} & \textbf{Recall} \\
+\midrule
+Repeat purchase & Logistic & .810 [.777, .844] & .736 & .748 & .631 & .920 \\
+Repeat purchase & RBF SVM & .814 [.780, .846] & .736 & .748 & .606 & .977 \\
+Session conversion & Logistic & .663 [.617, .710] & .904 & .647 & .594 & .711 \\
+Session conversion & RBF SVM & .670 [.623, .718] & .904 & .649 & .604 & .700 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{model_performance.pdf}
+    \Description{Grouped bars compare average precision and ROC AUC for logistic regression and RBF SVM on repeat-purchase and session-conversion holdout sets. The bars and bootstrap intervals are nearly equal within each outcome.}
+    \caption{Test-set model comparison. Error bars are 95\% bootstrap intervals.}
+    \label{fig:performance}
+\end{figure}
+
+The advantage in terms of AP of the RBF kernel SVM for repeat purchases is just 0.0039 (95\% paired CI $[-0.0048,0.0125]$) and 0.0063 (95\% CI $[-0.0222,0.0361]$) for conversion. As these intervals contain 0, the analysis fails to confirm any reliable advantage of nonlinear models in this application setting. Repeat purchase F1 score is virtually equal. However, SVM discovers more repeat purchasers (97.7\% recall) at the expense of slightly lower precision (60.6\%) compared to logistic regression (92.0\% recall, 63.1\% precision). Thus, an optimal threshold will depend on the relative costs of false negatives and false positives rather than on classification accuracy.
+
+The ranking results confirm this conclusion (Table~\ref{tab:lift}). In case of conversion, considering only the highest-scoring 20\% of sessions increases purchaser rate from 15.6\% to 56.8–57.6\%, identifying 73\% of purchasers, which is 3.6–3.7 times better than random targeting. Future repeat purchase has a higher base rate, so the lift is small but still valuable since the top quintile has a 90\% lift.
+
+\begin{table}[htbp]
+\caption{Decision value within the top-scored 20\% of held-out cases.}
+\label{tab:lift}
+\small
+\begin{tabularx}{\linewidth}{@{}Y l r r r@{}}
+\toprule
+\textbf{Outcome} & \textbf{Model} & \textbf{Precision} & \textbf{Lift} & \textbf{Positives captured} \\
+\midrule
+Repeat purchase & Logistic & 89.2\% & 1.52$\times$ & 30.3\% \\
+Repeat purchase & RBF SVM & 90.4\% & 1.54$\times$ & 30.7\% \\
+Session conversion & Logistic & 56.8\% & 3.63$\times$ & 72.7\% \\
+Session conversion & RBF SVM & 57.6\% & 3.69$\times$ & 73.8\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{decision_lift.pdf}
+    \Description{Two cumulative lift curves decline as the targeted share grows. Session conversion begins near 4.7 times the base rate at ten percent; repeat purchase begins near 1.6 times. Both reach one at the full population.}
+    \caption{Cumulative targeting lift across progressively larger priority groups.}
+    \label{fig:lift}
+\end{figure}
+
+\subsection{Insights from Both Sources}
+
+\textbf{Longer-term customer signal.} The repeat purchase decreases monotonically with the quartile of recency: 77.8\% for the most recent quartile of customers (median of 13 days post-purchase), 66.7\% for the recent quartile of customers, 53.3\% for the lapsing quartile of customers, and 36.9\% for the least recent quartile of customers (median of 198 days). This makes intuitive sense to the stakeholders. Model importance is more detailed, as the RBF SVM considers the observed tenure of the customers as the most important (AP change of -0.057 upon shuffling), followed by active days (0.017). The logistic model is biased towards active days.
+
+\textbf{Immediate session signal.} \texttt{PageValues} is the biggest in both models: its shuffle causes a reduction in AP of 0.430 for logistic regression and 0.457 for SVM. Purchase rate ranges from 3.9\% where page value is zero to 78.0\% at the top positive quartile. The next most important field is month, which has an approximate impact of 0.037 in AP for either model, while exit rate, bounce rate, admin pages and product page duration are less important.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{permutation_importance.pdf}
+    \Description{Horizontal bars show that observed customer tenure and active purchase days lead repeat-purchase importance, while page value overwhelmingly leads session-conversion importance.}
+    \caption{Permutation importance on held-out data, measured as decrease in AP.}
+    \label{fig:importance}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{business_insights.pdf}
+    \Description{Two bar charts show repeat purchase falling from 77.8 percent to 36.9 percent across recency groups, while session purchase rises from 3.9 percent at zero page value to 78.0 percent in the highest positive page-value quartile.}
+    \caption{Descriptive patterns that make the two modelled decision layers interpretable.}
+    \label{fig:insights}
+\end{figure}
+
+\textbf{Complementarity, not contradiction.} Insight is provided by both these sources. The transaction record gives information on durability of relationship and timing of re-engagement, while the session record gives information on intentions and conditions of the journey. The two records cannot confirm each other since they pertain to different organizations and organizational units, yet the messages they give are compatible – that engagement has been occurring recently and has high value, and so does the probability of a purchase.
+
+\subsection{Recommendation, Governance and Limitations}
+
+My recommendation is to use logistic regression as the production baseline model since there is no AP advantage demonstrated by SVM and the more complex model is harder to explain, monitor and challenge. The stakeholder dashboard would need to present score bands, base rate of the population, precision/lift of top-20\%, freshness of the data and the validation date of the model. The customer view can help with prioritization of accounts; the session view can help with aggregated journey monitoring.
+
+In advance of its roll-out, the pipeline used by Blackwoods needs to be validated on data that is contemporary and particular to their organisation; all fields, in particular \texttt{PageValues}, need to be verified prior to the decision process. Calibration of the scores is required if there is a presentation of probabilities, while costs in terms of false positives and negatives have to be estimated. The trial has to take place as the predictive relationship does not prove the intervention effects.
+
+The problem with external validity is another limitation. Online Retail has recorded UK gift sales during 2010 and 2011, not current Australian industrial supply sales, and anonymous customers are also ruled out. Online Shoppers includes anonymous customer log-ins without any time frame and demographic details. Therefore, representation and error differences between the different groups cannot be assessed. These data sets can be used only to illustrate how analysis can be performed and not for claims concerning Blackwoods customers.

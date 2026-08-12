@@ -1,0 +1,30 @@
+% Additional packages and commands used by this submission.
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+
+\graphicspath{{img/}}
+
+\definecolor{blackwoodsblue}{HTML}{003B5C}
+\definecolor{insightteal}{HTML}{008C95}
+\definecolor{softgray}{HTML}{F2F5F7}
+
+% Replace these two placeholders after importing the project into Overleaf and
+% publishing the reproducibility repository.
+\newcommand{\overleafprojecturl}{https://www.overleaf.com/project/6a79738cde34d8bf1e615332}
+\newcommand{\githubprojecturl}{https://github.com/Yaswanthgunti/blackwoods-customers-insights}
+
+\newcommand{\wordcount}[1]{\noindent\textbf{[Word count: #1]}} %macro for word count
+
+\newcommand{\todo}[1]{\textcolor{red}{\bf [[TODO: #1]]}} 
+
+%extra packages for the tables in the appendix
+\usepackage{longtable}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.25}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcommand{\result}[1]{\textbf{#1}}

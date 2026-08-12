@@ -1,0 +1,59 @@
+dataset,model,feature,display_feature,importance_mean,importance_std
+Future repeat purchase,Logistic regression,recency_days,Days since last purchase,0.004803081219227461,0.004319679055107355
+Future repeat purchase,Logistic regression,frequency_orders,Previous orders,0.028908062456152767,0.007451845297604289
+Future repeat purchase,Logistic regression,monetary_value,Previous spend,0.0011909289450341642,0.002585547889255987
+Future repeat purchase,Logistic regression,average_order_value,Average order value,0.02424347851530612,0.004474553805442172
+Future repeat purchase,Logistic regression,units_purchased,Units purchased,0.0029254856753696545,0.0034185703131069107
+Future repeat purchase,Logistic regression,average_basket_units,Average basket size,0.00020374403608094838,0.0005765026603853591
+Future repeat purchase,Logistic regression,unique_products,Unique products,0.01714704136026885,0.0045493948857431125
+Future repeat purchase,Logistic regression,active_days,Active purchase days,0.1768941809582899,0.015904537276475898
+Future repeat purchase,Logistic regression,tenure_days,Observed customer tenure,-0.0005822853422589481,0.0015226074616365073
+Future repeat purchase,Logistic regression,mean_unit_price,Mean unit price,0.0031637047887207006,0.002492723020031546
+Future repeat purchase,Logistic regression,cancellation_line_rate,Cancellation-line rate,0.0002504203356865187,0.0007684059345359923
+Future repeat purchase,Logistic regression,is_uk,UK customer,-4.8440749912681544e-05,0.00010819754213578201
+Future repeat purchase,RBF support vector machine,recency_days,Days since last purchase,0.0030403812268609354,0.00208657121683308
+Future repeat purchase,RBF support vector machine,frequency_orders,Previous orders,0.004317304293185833,0.0035595632323644805
+Future repeat purchase,RBF support vector machine,monetary_value,Previous spend,0.005605070811039829,0.0030771699156152527
+Future repeat purchase,RBF support vector machine,average_order_value,Average order value,0.0018078117781037185,0.0015078386988008367
+Future repeat purchase,RBF support vector machine,units_purchased,Units purchased,0.0036370992331870777,0.002489030899702765
+Future repeat purchase,RBF support vector machine,average_basket_units,Average basket size,0.0011500506761754493,0.0012799564080728499
+Future repeat purchase,RBF support vector machine,unique_products,Unique products,0.005027595924126085,0.0031621192524216458
+Future repeat purchase,RBF support vector machine,active_days,Active purchase days,0.017248100330364703,0.008355721899454098
+Future repeat purchase,RBF support vector machine,tenure_days,Observed customer tenure,0.05701621379567838,0.01087362668163689
+Future repeat purchase,RBF support vector machine,mean_unit_price,Mean unit price,0.0011408429183934875,0.0016018086937065333
+Future repeat purchase,RBF support vector machine,cancellation_line_rate,Cancellation-line rate,2.372858415577106e-05,0.0012813073610035385
+Future repeat purchase,RBF support vector machine,is_uk,UK customer,-5.3074729278099756e-05,0.00031171812983818903
+Session purchase conversion,Logistic regression,Administrative,Administrative pages,-0.0021099541495385355,0.0009327285666627224
+Session purchase conversion,Logistic regression,Administrative_Duration,Administrative duration,0.0004291847031800877,0.00033703244247604666
+Session purchase conversion,Logistic regression,Informational,Informational pages,-0.0004572989341894651,0.0007691669547127465
+Session purchase conversion,Logistic regression,Informational_Duration,Informational duration,0.00015086923074477898,0.00014666623105344953
+Session purchase conversion,Logistic regression,ProductRelated,Product pages,0.00030069258006971023,0.0007102095753425288
+Session purchase conversion,Logistic regression,ProductRelated_Duration,Product-page duration,0.004392497310303089,0.0017669480403537208
+Session purchase conversion,Logistic regression,BounceRates,Bounce rate,6.924601206845793e-06,0.00020042766809223237
+Session purchase conversion,Logistic regression,ExitRates,Exit rate,0.018549034107753895,0.00515679949875261
+Session purchase conversion,Logistic regression,PageValues,Page value,0.4302348880710988,0.006481716976956472
+Session purchase conversion,Logistic regression,SpecialDay,Special-day proximity,1.3322945863056822e-05,0.00022540209277576654
+Session purchase conversion,Logistic regression,Month,Month,0.03846081603236991,0.004923542459364748
+Session purchase conversion,Logistic regression,OperatingSystems,Operating system,0.0015305028888951888,0.0006341134096476373
+Session purchase conversion,Logistic regression,Browser,Browser,0.0013421739690274537,0.0010805257469825922
+Session purchase conversion,Logistic regression,Region,Region,0.0007234864135531937,0.0013080089288244503
+Session purchase conversion,Logistic regression,TrafficType,Traffic type,0.004756094244897118,0.002479531206925284
+Session purchase conversion,Logistic regression,VisitorType,Visitor type,0.0001403584865098706,0.00012206541035381601
+Session purchase conversion,Logistic regression,Weekend,Weekend,0.00012929010403623487,0.0005099402638153903
+Session purchase conversion,RBF support vector machine,Administrative,Administrative pages,0.016518924920435465,0.007218219647951127
+Session purchase conversion,RBF support vector machine,Administrative_Duration,Administrative duration,-0.0012253732733135613,0.003288720116672248
+Session purchase conversion,RBF support vector machine,Informational,Informational pages,0.0015203012557760509,0.002734557674877527
+Session purchase conversion,RBF support vector machine,Informational_Duration,Informational duration,-0.001927012873257672,0.001899394591160868
+Session purchase conversion,RBF support vector machine,ProductRelated,Product pages,0.004812755492203733,0.0037329978109757757
+Session purchase conversion,RBF support vector machine,ProductRelated_Duration,Product-page duration,0.0048622993237028836,0.0036966086176934824
+Session purchase conversion,RBF support vector machine,BounceRates,Bounce rate,0.008794017910810114,0.00524630368343052
+Session purchase conversion,RBF support vector machine,ExitRates,Exit rate,0.010298999516882743,0.005233483516605883
+Session purchase conversion,RBF support vector machine,PageValues,Page value,0.45724767481045114,0.00802611323641012
+Session purchase conversion,RBF support vector machine,SpecialDay,Special-day proximity,0.0010612727289493673,0.00227468506542257
+Session purchase conversion,RBF support vector machine,Month,Month,0.03668386036761198,0.004867738968719427
+Session purchase conversion,RBF support vector machine,OperatingSystems,Operating system,0.0013810674193436645,0.001635797810671551
+Session purchase conversion,RBF support vector machine,Browser,Browser,0.002916648770302084,0.0020714959125435572
+Session purchase conversion,RBF support vector machine,Region,Region,0.001058891388114951,0.0022514989114234604
+Session purchase conversion,RBF support vector machine,TrafficType,Traffic type,0.0019962062724215367,0.002693690009127111
+Session purchase conversion,RBF support vector machine,VisitorType,Visitor type,0.0046061220811576134,0.0021008944682630757
+Session purchase conversion,RBF support vector machine,Weekend,Weekend,0.0037914522804091354,0.0019049182391079732

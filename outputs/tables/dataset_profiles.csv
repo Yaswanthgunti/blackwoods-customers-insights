@@ -1,0 +1,20 @@
+dataset,field,value
+Future repeat purchase,source_rows,541909
+Future repeat purchase,source_columns,8
+Future repeat purchase,source_duplicate_rows,5268
+Future repeat purchase,missing_customer_ids,135080
+Future repeat purchase,known_customers,4372
+Future repeat purchase,modelling_customers,3317
+Future repeat purchase,history_start,2010-12-01 08:26:00
+Future repeat purchase,history_end,2011-08-31 17:16:00
+Future repeat purchase,outcome_start,2011-09-01 08:25:00
+Future repeat purchase,outcome_end,2011-12-09 12:50:00
+Future repeat purchase,positive_cases,1952
+Future repeat purchase,positive_rate,0.5884835694905035
+Session purchase conversion,source_rows,12330
+Session purchase conversion,source_columns,18
+Session purchase conversion,source_duplicate_rows,125
+Session purchase conversion,modelling_sessions,12205
+Session purchase conversion,missing_values,0
+Session purchase conversion,positive_cases,1908
+Session purchase conversion,positive_rate,0.15632937320770177

@@ -1,0 +1,203 @@
+[
+  {
+    "dataset": "Future repeat purchase",
+    "profile": {
+      "source_rows": 541909,
+      "source_columns": 8,
+      "source_duplicate_rows": 5268,
+      "missing_customer_ids": 135080,
+      "known_customers": 4372,
+      "modelling_customers": 3317,
+      "history_start": "2010-12-01 08:26:00",
+      "history_end": "2011-08-31 17:16:00",
+      "outcome_start": "2011-09-01 08:25:00",
+      "outcome_end": "2011-12-09 12:50:00",
+      "positive_cases": 1952,
+      "positive_rate": 0.5884835694905035
+    },
+    "train_rows": 2487,
+    "test_rows": 830,
+    "models": {
+      "Logistic regression": {
+        "best_params": {
+          "model__C": 1.0
+        },
+        "cv_average_precision": 0.8246301014328307,
+        "threshold": -0.9595328469610543,
+        "test_metrics": {
+          "average_precision": 0.8103524913289011,
+          "roc_auc": 0.7356617294602628,
+          "accuracy": 0.636144578313253,
+          "balanced_accuracy": 0.5755380596299492,
+          "precision": 0.6306179775280899,
+          "recall": 0.9200819672131147,
+          "f1": 0.7483333333333333
+        },
+        "bootstrap_95_ci": {
+          "average_precision": [
+            0.7773858834105477,
+            0.8439752692460769
+          ],
+          "roc_auc": [
+            0.7016467455562994,
+            0.7681370098689909
+          ],
+          "f1": [
+            0.7212241418306453,
+            0.7760753825135354
+          ],
+          "recall": [
+            0.8973680952595328,
+            0.9417706094085888
+          ],
+          "precision": [
+            0.5958167613636364,
+            0.6676023923988034
+          ]
+        }
+      },
+      "RBF support vector machine": {
+        "best_params": {
+          "model__C": 0.5,
+          "model__gamma": 0.01
+        },
+        "cv_average_precision": 0.8251814240456575,
+        "threshold": -1.0199629920871778,
+        "test_metrics": {
+          "average_precision": 0.814279076116111,
+          "roc_auc": 0.7364885916978239,
+          "accuracy": 0.6132530120481928,
+          "balanced_accuracy": 0.5355131339277155,
+          "precision": 0.6060991105463787,
+          "recall": 0.9774590163934426,
+          "f1": 0.7482352941176471
+        },
+        "bootstrap_95_ci": {
+          "average_precision": [
+            0.7797729022548537,
+            0.8463170092709515
+          ],
+          "roc_auc": [
+            0.7008500296182288,
+            0.7695640451473313
+          ],
+          "f1": [
+            0.720947229734415,
+            0.7757319678864957
+          ],
+          "recall": [
+            0.9633382517976641,
+            0.9894302881940581
+          ],
+          "precision": [
+            0.5725240367384972,
+            0.64122619323001
+          ]
+        }
+      }
+    },
+    "paired_ap_comparison": {
+      "svm_minus_logistic_ap": 0.003926584787209864,
+      "ci_low": -0.004767809201043865,
+      "ci_high": 0.012540451647385147
+    }
+  },
+  {
+    "dataset": "Session purchase conversion",
+    "profile": {
+      "source_rows": 12330,
+      "source_columns": 18,
+      "source_duplicate_rows": 125,
+      "modelling_sessions": 12205,
+      "missing_values": 0,
+      "positive_cases": 1908,
+      "positive_rate": 0.15632937320770177
+    },
+    "train_rows": 9153,
+    "test_rows": 3052,
+    "models": {
+      "Logistic regression": {
+        "best_params": {
+          "model__C": 0.1
+        },
+        "cv_average_precision": 0.6468552132005092,
+        "threshold": 0.308920764107563,
+        "test_metrics": {
+          "average_precision": 0.6633299071772265,
+          "roc_auc": 0.9041338462477865,
+          "accuracy": 0.8787680209698558,
+          "balanced_accuracy": 0.8102973682603651,
+          "precision": 0.5936952714535902,
+          "recall": 0.710691823899371,
+          "f1": 0.6469465648854962
+        },
+        "bootstrap_95_ci": {
+          "average_precision": [
+            0.6166546117468814,
+            0.7101699303992836
+          ],
+          "roc_auc": [
+            0.8893428756629322,
+            0.9168816178751089
+          ],
+          "f1": [
+            0.6125553655756392,
+            0.6771567375594797
+          ],
+          "recall": [
+            0.6666500994035784,
+            0.7484524371533106
+          ],
+          "precision": [
+            0.5523926356519606,
+            0.6306348092062378
+          ]
+        }
+      },
+      "RBF support vector machine": {
+        "best_params": {
+          "model__C": 10.0,
+          "model__gamma": 0.01
+        },
+        "cv_average_precision": 0.6864249371016966,
+        "threshold": 0.3569183889768608,
+        "test_metrics": {
+          "average_precision": 0.669669952960596,
+          "roc_auc": 0.9040345199568501,
+          "accuracy": 0.8813892529488859,
+          "balanced_accuracy": 0.8075805499582749,
+          "precision": 0.6039783001808319,
+          "recall": 0.70020964360587,
+          "f1": 0.6485436893203883
+        },
+        "bootstrap_95_ci": {
+          "average_precision": [
+            0.6229428428123185,
+            0.7181516689669531
+          ],
+          "roc_auc": [
+            0.888081939565739,
+            0.9188280052229503
+          ],
+          "f1": [
+            0.6139376790728835,
+            0.6803724680170575
+          ],
+          "recall": [
+            0.65931526317942,
+            0.7403710887348226
+          ],
+          "precision": [
+            0.5620502629691609,
+            0.6446219447775922
+          ]
+        }
+      }
+    },
+    "paired_ap_comparison": {
+      "svm_minus_logistic_ap": 0.006340045783369441,
+      "ci_low": -0.022218901223393626,
+      "ci_high": 0.03614563976180944
+    }
+  }
+]
